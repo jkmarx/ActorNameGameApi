@@ -8,6 +8,7 @@ gem 'pg'
 gem 'imdb', '~> 0.8'
 gem 'rack-cors'
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
+gem 'rack-ssl-enforcer'
 
 group :development, :test do
   gem 'capybara'
