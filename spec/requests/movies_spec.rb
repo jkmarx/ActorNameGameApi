@@ -2,13 +2,27 @@ require 'rails_helper'
 
 describe 'Movie Requests' do
 
-  describe '#castImages' do
-    it 'gets a movie first five cast and images' do
+  describe '#movie' do
+    it 'gets an array of all movie matches' do
       post '/movies',
       { movie: {
-        name: "The Lion King"
+        title: "The Lion King"
         }
-      }.to_json
+      }
+      expect(response).to be_success
+      json = JSON.parse(response.body)
+      expect(json.length).to eq 7
+      expect(json).to eq [{"id"=>"0110357", "url"=>"http://akas.imdb.com/title/tt0110357/combined", "title"=>"The Lion King (1994)"}, {"id"=>"2102471", "url"=>"http://akas.imdb.com/title/tt2102471/combined", "title"=>"White Lions: King of Kings (2005)"}, {"id"=>"3698172", "url"=>"http://akas.imdb.com/title/tt3698172/combined", "title"=>"The Making of the Lion (2013)"}, {"id"=>"0120733", "url"=>"http://akas.imdb.com/title/tt0120733/combined", "title"=>"Lion of Oz (2000)"}, {"id"=>"0047150", "url"=>"http://akas.imdb.com/title/tt0047150/combined", "title"=>"King Richard and the Crusaders (1954)"}, {"id"=>"0024219", "url"=>"http://akas.imdb.com/title/tt0024219/combined", "title"=>"King of the Jungle (1933)"}, {"id"=>"0187967", "url"=>"http://akas.imdb.com/title/tt0187967/combined", "title"=>"Huang Fei Hong shi wang zheng ba (1957)"}]
+    end
+  end
+
+  describe '#castImages' do
+    it 'gets a movie first five cast and images' do
+      post '/movies/cast',
+      { movie: {
+        id: "0110357"
+        }
+      }
       expect(response).to be_success
       json = JSON.parse(response.body)
       expect(json.length).to eq 5

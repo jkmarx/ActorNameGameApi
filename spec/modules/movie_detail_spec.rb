@@ -9,13 +9,13 @@ describe MovieDetail do
 
   describe 'MovieDetail::findTitleMatches' do
     it 'returns an array of movie object' do
-      expect(MovieDetail::findTitleMatches(title).size).to eq 2
+      expect(MovieDetail::findTitleMatches(title).size).to eq 1
     end
   end
 
   describe 'MovieDetail::getMovieCastIds' do
     it 'returns first movie object in search array' do
-      expect(MovieDetail::getMovieCastIds("Eternal Sunshine of the Spotless Mind")).to include "nm0000120"
+      expect(MovieDetail::getMovieCastIds("0338013")).to include "nm0000120"
     end
   end
 

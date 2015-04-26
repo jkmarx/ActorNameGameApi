@@ -1,10 +1,6 @@
 class Movie
   include ActiveModel::Model
 
-  def self.requestCastIds(title)
-    MovieDetail::getMovieCastIds("The Lion King")
-  end
-
   def self.getPersonsData(arrId)
     arrId.map{ |personId| JSON.parse(MovieDetail::requestPerson(personId).body)["person_results"][0] }
   end
@@ -13,8 +9,8 @@ class Movie
     data.map{ |person| {name: person["name"], image: "https://image.tmdb.org/t/p/w185" + person["profile_path"]} }
   end
 
-  def self.getFiveCastImage(title)
-    castIds = requestCastIds(title)
+  def self.getFiveCastImage(movieId)
+    castIds = MovieDetail::getMovieCastIds(movieId)
     personsDetails = getPersonsData(castIds[0..4])
     parseNameImage(personsDetails)
   end

@@ -8,15 +8,15 @@ module MovieDetail
   end
 
   def self.removeTvSeries(data)
-    data.reject { |movie| movie.title.index('TV Series') }
+    data.reject { |movie| movie.title.index('TV Series') || movie.title.index('Video Game') || movie.title.index('TV Mini-Series') || movie.title.index('Short') || movie.title.index('TV Movie') || movie.title.index('Video') }
   end
 
-  def self.getMovieCast(title)
-    findTitleMatches(title).first.cast_members
+  def self.getMovieCast(movieId)
+    findTitleMatches(movieId).first.cast_members
   end
 
-  def self.getMovieCastIds(title)
-    findTitleMatches(title).first.cast_member_ids
+  def self.getMovieCastIds(movieId)
+    Imdb::Movie.new(movieId).cast_member_ids
   end
 
   def self.requestPerson(imdb_id)
