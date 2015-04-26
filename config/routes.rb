@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  get '/movies', to: 'movies#index'
+  post '/movies', to: 'movies#castImages', param: :name
 end

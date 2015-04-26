@@ -15,7 +15,7 @@ describe MovieDetail do
 
   describe 'MovieDetail::getMovieCastIds' do
     it 'returns first movie object in search array' do
-      expect(MovieDetail::getMovieCast("Eternal Sunshine of the Spotless Mind")).to include "nm0000120"
+      expect(MovieDetail::getMovieCastIds("Eternal Sunshine of the Spotless Mind")).to include "nm0000120"
     end
   end
 

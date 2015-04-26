@@ -1,25 +1,21 @@
 class Movie
-  include ActiveModel::MovieDetail
-
-  attr_accessor :title, :cast_members, :images
+  include ActiveModel::Model
 
   def self.requestCastIds(title)
     MovieDetail::getMovieCastIds("The Lion King")
   end
 
   def self.getPersonsData(arrId)
-    arrId.map{ |personId| MovieDetail::requestPerson(personId).body.to_json }
+    arrId.map{ |personId| JSON.parse(MovieDetail::requestPerson(personId).body)["person_results"][0] }
   end
 
   def self.parseNameImage(data)
-    data.map{ |person| {name: person.name, image: person.} }
+    data.map{ |person| {name: person["name"], image: "https://image.tmdb.org/t/p/w185" + person["profile_path"]} }
   end
 
   def self.getFiveCastImage(title)
-    castIds = requestCaseIds(title)
+    castIds = requestCastIds(title)
     personsDetails = getPersonsData(castIds[0..4])
-    byebug;
     parseNameImage(personsDetails)
-
   end
 end
