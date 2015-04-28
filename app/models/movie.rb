@@ -12,7 +12,7 @@ class Movie
   def self.addValidCast(castIds)
     validCast = []
     ind = 0
-    while validCast.length < 6 && ind < castIds.length
+    while validCast.length < 5 && ind < castIds.length
       tempActor = getPersonsData(castIds[ind])
       if tempActor && tempActor["name"] && tempActor["profile_path"]
         validCast << tempActor
